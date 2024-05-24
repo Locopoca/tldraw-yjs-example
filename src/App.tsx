@@ -17,7 +17,7 @@ import {
 import { ConnectButton, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 
 const config = getDefaultConfig({
-	appName: 'thePolacy DRAW',
+	appName: 'thePaint',
 	projectId: 'YOUR_PROJECT_ID',
 	chains: [
 		mainnet,
