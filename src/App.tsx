@@ -14,7 +14,11 @@ import {
 	polygon,
 	sepolia,
 } from 'wagmi/chains'
-import { ConnectButton, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import {
+	ConnectButton,
+	getDefaultConfig,
+	RainbowKitProvider,
+} from '@rainbow-me/rainbowkit'
 
 const config = getDefaultConfig({
 	appName: 'thePaint',
@@ -39,32 +43,33 @@ const HOST_URL =
 		: 'wss://demos.yjs.dev'
 
 export default function YjsExample() {
-
 	const hasNFT = useCheckNftOwnership(CONTRACT_ADDRESS)
 	const store = useYjsStore({
 		roomId: 'example17',
 		hostUrl: HOST_URL,
 	})
 
-	console.log('Rendering YjsExample: hasNFT =', hasNFT);
+	console.log('Rendering YjsExample: hasNFT =', hasNFT)
 
 	return (
 		<WagmiProvider config={config}>
 			<QueryClientProvider client={client}>
 				<RainbowKitProvider>
-					<div className='app-container'>
-					<ConnectButton />
-					{hasNFT ? (
-						<div className="tldraw__editor">
-							<Tldraw
-								autoFocus
-								store={store}
-								components={{
-									SharePanel: NameEditor,
-								}}
-							/>
-						</div>
-					):""}
+					<div className="app-container">
+						<ConnectButton />
+						{hasNFT ? (
+							<div className="tldraw__editor">
+								<Tldraw
+									autoFocus
+									store={store}
+									components={{
+										SharePanel: NameEditor,
+									}}
+								/>
+							</div>
+						) : (
+							''
+						)}
 					</div>
 				</RainbowKitProvider>
 			</QueryClientProvider>
@@ -78,8 +83,11 @@ const NameEditor = track(() => {
 	const { color, name } = editor.user.getUserPreferences()
 
 	return (
-		<div style={{ pointerEvents: 'all', display: 'flex' }}>
+		<div
+			style={{ pointerEvents: 'all', display: 'flex' }}
+		>
 			<input
+				className="userColor"
 				type="color"
 				value={color}
 				onChange={(e) => {
@@ -89,6 +97,7 @@ const NameEditor = track(() => {
 				}}
 			/>
 			<input
+				className="userName"
 				value={name}
 				onChange={(e) => {
 					editor.user.updateUserPreferences({
